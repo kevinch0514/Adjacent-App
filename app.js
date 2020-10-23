@@ -36,6 +36,7 @@ function getLayoutHTML(content) {
 
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/main.css">
+        <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
       </head>
       <body>
         <section id="content">
@@ -76,6 +77,7 @@ app.get('/', (request, response) => { // this page will be the same as Trey's wi
   let content = `
 
     <main class="grid" id="content">
+
       <a href="/presentations"><img src="http://adjacent-app.surge.sh/images/presentations.png" alt="presentation"></a>
 			<a href="/projects"><img src="http://adjacent-app.surge.sh/images/projects.png" alt="project"></a>
 			<a href="/feedback"><img src="http://adjacent-app.surge.sh/images/feedback.png" alt="feedback"></a>
@@ -95,6 +97,7 @@ app.get('/', (request, response) => { // this page will be the same as Trey's wi
 app.get('/presentations', (request, response) => {
   let content = `
     <h1>Presentations</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here are all of the Presentations for _______</p>
 
     <div id = "presentationList">
@@ -110,6 +113,7 @@ app.get('/presentations', (request, response) => {
 app.get('/projects', (request, response) => {
   let content = `
     <h1>Projects</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here are all of the projects for _______</p>
 
     <div id = "projectList">
@@ -125,7 +129,8 @@ app.get('/projects', (request, response) => {
 
 app.get('/feedback', (request, response) => {
   let content = `
-    <h1>Feedback Page</h1>
+    <h1>Feedback</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here is all of the feedback for _______</p>
 
     <div id = "feedbackList">
@@ -142,7 +147,8 @@ app.get('/feedback', (request, response) => {
 
 app.get('/schedule', (request, response) => {
   let content = `
-    <h1>Schedule Page</h1>
+    <h1>Schedule</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here is all of the feedback for _______ (There will be a schedule for each week)</p>
     <p> Could also put links to the google calendar</p>
 
@@ -160,7 +166,8 @@ app.get('/schedule', (request, response) => {
 
 app.get('/announcements', (request, response) => {
   let content = `
-    <h1>Announcements Page</h1>
+    <h1>Announcements</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here is list of all the important announcements </p>
 
 
@@ -174,28 +181,11 @@ app.get('/announcements', (request, response) => {
   response.send(getLayoutHTML(content));
 });
 
-app.get('/syllabus', (request, response) => {
+app.get('/curriculum', (request, response) => {
   let content = `
-    <h1>Syllabus Page</h1>
-    <p> The syllabus will be displayed in a manner in which the team feels is good</p>
-
-    <p><a href="/">Back to the homepage</a></p>
-  `;
-
-  response.send(getLayoutHTML(content));
-});
-
-app.get('/repository', (request, response) => {
-  let content = `
-    <h1>Repository Page</h1>
-    <p>Here is list of all repositories for __________ </p>
-
-    <div id = "repositoryList">
-    <p> A list of repositories in chronological order, newest at top </p>
-    </div>
-
-    <div id = "pushList">
-    <p> here will be a list of all push requests from user x, in chronological order, newest at top </p>
+    <h1>Curriculum</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
+    <p> The curriculum outline will be displayed in a manner in which the team feels is good</p>
 
     <p><a href="/">Back to the homepage</a></p>
   `;
@@ -205,10 +195,65 @@ app.get('/repository', (request, response) => {
 
 app.get('/resources', (request, response) => {
   let content = `
-    <h1>Resources Page</h1>
+    <h1>Resources</h1>
+    <h2>⚠️This page is under construction⚠️</h2>
     <p>Here is list of all the important Resources </p>
     <p> There is a lot of freedom here </p>
+
+    <p><a href="/">Back to the homepage</a></p>
   `;
+
+  response.send(getLayoutHTML(content));
+});
+
+app.get('/repository', (request, response) => {
+  let usrname = request.query.usrname;
+
+  let content = `
+    <h1>Repository</h1>
+    <h3>This repository page allows you to check on the latest commitments made on GitHub by typing in a username.</h3>
+    <h3>Get started by typing in a GitHub username.</h3>
+    <form action="/resources">
+        <label for="usrname">Username:</label>
+        <input type="text" id="usrname" name="usrname" required>
+        <input type="submit" value="Submit">
+    </form>
+  `;
+
+  // // GITHUB COMMIT API ===================================================
+  // let process = require('process');
+  // let { Octokit } = require("@octokit/rest");
+
+  // function main(username) {
+
+  //   let octokit = new Octokit({});
+
+  //   octokit.repos.listForUser({ username: username }).then(function(response) {
+  //     let data = response.data;
+
+  //     for (let item of data) {
+  //       console.log(`Repo: ${item.name}`);
+
+  //       octokit.repos.listCommits({
+  //         owner: username,
+  //         repo: item.name,
+  //       }).then(function(response) {
+  //         console.log(response.data[0].commit.author);
+  //       });
+
+  //     }
+  //   });
+  // }
+
+  // let username = process.argv[2];
+
+  // if (username === undefined) {
+  //   console.log('Please specify username');
+  //   process.exit(1);
+  // }
+
+  // main(username);
+  // //==============================================================
 
   response.send(getLayoutHTML(content));
 });
