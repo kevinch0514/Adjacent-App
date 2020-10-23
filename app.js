@@ -207,53 +207,74 @@ app.get('/resources', (request, response) => {
 });
 
 app.get('/repository', (request, response) => {
-  let usrname = request.query.usrname;
+  let username = request.query.username;
 
-  let content = `
+  // if (username === undefined) {
+    let content = `
     <h1>Repository</h1>
     <h3>This repository page allows you to check on the latest commitments made on GitHub by typing in a username.</h3>
     <h3>Get started by typing in a GitHub username.</h3>
-    <form action="/resources">
-        <label for="usrname">Username:</label>
-        <input type="text" id="usrname" name="usrname" required>
+    <form action="/repository">
+        <label for="username">Username:</label>
+        <input type="text" id="usrname" name="username" required>
         <input type="submit" value="Submit">
     </form>
   `;
+  // } else {
+  //   let content = `
+  //   <h1>Repository</h1>
+  //   <h3>This repository page allows you to check on the latest commitments made on GitHub by typing in a username.</h3>
+  //   <h3>Get started by typing in a GitHub username.</h3>
+  //   <form action="/resources">
+  //       <label for="username">Username:</label>
+  //       <input type="text" id="usrname" name="username" required>
+  //       <input type="submit" value="Submit">
+  //   </form>
+  // `;
 
-  // // GITHUB COMMIT API ===================================================
+  // GITHUB COMMIT API
   // let process = require('process');
-  // let { Octokit } = require("@octokit/rest");
+  let { Octokit } = require("@octokit/rest");
 
-  // function main(username) {
+  function main(username) {
 
-  //   let octokit = new Octokit({});
+    let octokit = new Octokit({});
 
-  //   octokit.repos.listForUser({ username: username }).then(function(response) {
-  //     let data = response.data;
+    content += `<ol>`;
 
-  //     for (let item of data) {
-  //       console.log(`Repo: ${item.name}`);
+    octokit.repos.listForUser({ username: username }).then(function(response) {
+      let data = response.data;
 
-  //       octokit.repos.listCommits({
-  //         owner: username,
-  //         repo: item.name,
-  //       }).then(function(response) {
-  //         console.log(response.data[0].commit.author);
-  //       });
+      for (let item of data) {
+        console.log(`Repo: ${item.name}`);
+        content += `<li>Repo: ${item.name}</li>`;
 
-  //     }
-  //   });
-  // }
+        // content += `<ol>`;
 
-  // let username = process.argv[2];
+        octokit.repos.listCommits({
+          owner: username,
+          repo: item.name,
+        }).then(function(response) {
+          console.log(response.data[0].commit.author);
+          content += `<li>${response.data[0].commit.author}</li>`;
+        }).catch((error) => {
+          assert.isNotOk(error,'Promise error'); //https://stackoverflow.com/questions/39716569/nodejs-unhandledpromiserejectionwarning
+        });
 
-  // if (username === undefined) {
-  //   console.log('Please specify username');
-  //   process.exit(1);
-  // }
+    // content += `<ol>`;
+      }
+    });
+    content += `<ol>`;
+  }
 
-  // main(username);
-  // //==============================================================
+    // let username = process.argv[2];
+
+    // if (username === undefined) {
+    //   console.log('Please specify username');
+    //   process.exit(1);
+    // }
+
+    main(username);
 
   response.send(getLayoutHTML(content));
 });

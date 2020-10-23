@@ -4,6 +4,7 @@
   "description": "Exercise to learn about dynamic web pages",
   "main": "app.js",
   "dependencies": {
+    "@octokit/rest": "^18.0.6",
     "express": "^4.17.1",
     "hbs": "^4.1.1",
     "morgan": "^1.10.0"
