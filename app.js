@@ -48,73 +48,45 @@ function getLayoutHTML(content) {
   return html;
 }
 
-app.get('/', (request, response) => {
-  let appDescription = `
-    <p>Welcome to the Adjancent App,Where Learning Has No Speed-Limit, the Autobahn of Education Really!</p>
-    <p>First Login with your Adjacent Academy Username and Password </p>
-  `;
+// app.get('/', (request, response) => {
+//   let appDescription = `
+//     <p>Welcome to the Adjancent App,Where Learning Has No Speed-Limit, the Autobahn of Education Really!</p>
+//     <p>First Login with your Adjacent Academy Username and Password </p>
+//   `;
 
+//   let content = `
+//     <h1>Adjacent App!</h1>
+//     ${appDescription}
+//     <p>Sign In</p>
+//     `
+//     /* here we would put the code for the sign in. We need to link the HTML for the
+//     sign in box into this spot. Don't forget the javascript as well!!!*/
+
+//     /* then we will need to find a way to link this page to the next required page,
+//     the user home page. The path to the succesful logged in user home-page will
+//     be ----------   /home ------------ */
+//   ;
+
+//   let pageHtml = getLayoutHTML(content);
+
+//   response.send(pageHtml);
+// });
+
+app.get('/', (request, response) => { // this page will be the same as Trey's wireframe, there will be links to each page
   let content = `
-    <h1>Adjacent App!</h1>
-    ${appDescription}
-    <p>Sign In</p>
-    `
-    /* here we would put the code for the sign in. We need to link the HTML for the
-    sign in box into this spot. Don't forget the javascript as well!!!*/
 
-    /* then we will need to find a way to link this page to the next required page,
-    the user home page. The path to the succesful logged in user home-page will
-    be ----------   /home ------------ */
-  ;
+    <main class="grid" id="content">
+      <a href="/presentations"><img src="http://adjacent-app.surge.sh/images/presentations.png" alt="presentation"></a>
+			<a href="/projects"><img src="http://adjacent-app.surge.sh/images/projects.png" alt="project"></a>
+			<a href="/feedback"><img src="http://adjacent-app.surge.sh/images/feedback.png" alt="feedback"></a>
+      <a href="/schedule"><img src="http://adjacent-app.surge.sh/images/schedule.png" alt="schedule"></a>
+      <img src="http://adjacent-app.surge.sh/images/main.png" alt="adjacent app">
+      <a href="/announcements"><img src="http://adjacent-app.surge.sh/images/announcements.png" alt=announcements></a>
+			<a href="/curriculum"><img src="http://adjacent-app.surge.sh/images/curriculum.png"></a>
+      <a href="/resources"><img src="http://adjacent-app.surge.sh/images/resources.png" alt="Resources"></a>
+      <a href="/repository"><img src="http://adjacent-app.surge.sh/images/repository.png" alt="Repository"></a>
+    </main>
 
-  let pageHtml = getLayoutHTML(content);
-
-  response.send(pageHtml);
-});
-
-app.get('/home', (request, response) => { // this page will be the same as Trey's wireframe, there will be links to each page
-  let content = `
-    <h1>Adjacent Academies!</h1>
-
-    <p>Start exploring by clicking the links below.</p>
-
-    <h2>Welcome</h2>
-
-    <div id = 'Presentations'>
-    <li><a href="/presentations">presentations</a></li>
-    </div>
-
-    <div id = 'Projects'>
-    <li><a href="/projects">projects</a></li>
-    </div>
-
-    <div id = 'Feedback'>
-    <li><a href="/feedback">feedback</a></li>
-    </div>
-
-    <div id = 'Schedule'>
-    <li><a href="/schedule">schedule</a></li>
-    </div>
-
-    <div id = 'Adjacent Acadmies'>
-    <p> An Adjacent Acadmies photo will go here </p>
-    </div>
-
-    <div id = 'Announcements'>
-    <li><a href="/announcements">Announcements</a></li>
-    </div>
-
-    <div id = 'Syllabus'>
-    <li><a href="/syllabus">syllabus</a></li>
-    </div>
-
-    <div id = 'Repository'>
-    <li><a href="/repository">repository</a></li>
-    </div>
-
-    <div id = 'Resources'>
-    <li><a href="/resources">resources</a></li>
-    </div>
   `;
 
   response.send(getLayoutHTML(content));
@@ -129,7 +101,7 @@ app.get('/presentations', (request, response) => {
     <p> A list of the presentations supplied with data from the API will be in this spot </p>
     </div>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
@@ -144,7 +116,7 @@ app.get('/projects', (request, response) => {
     <p> We could have links to the google docs for each project, each projects description </p>
     </div>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
@@ -160,7 +132,7 @@ app.get('/feedback', (request, response) => {
     <p> We could have links to feedback for the specific user from all intructors, they could be their own pages as well  </p>
     </div>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
 
   `;
 
@@ -179,7 +151,7 @@ app.get('/schedule', (request, response) => {
     <p> We woudld then have links to pages for every week </p>
     </div>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
@@ -196,7 +168,7 @@ app.get('/announcements', (request, response) => {
     <p> A list of announcements in chronological order, newest at top </p>
     </div>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
@@ -207,7 +179,7 @@ app.get('/syllabus', (request, response) => {
     <h1>Syllabus Page</h1>
     <p> The syllabus will be displayed in a manner in which the team feels is good</p>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
@@ -225,7 +197,7 @@ app.get('/repository', (request, response) => {
     <div id = "pushList">
     <p> here will be a list of all push requests from user x, in chronological order, newest at top </p>
 
-    <p><a href="/home">Back to the homepage</a></p>
+    <p><a href="/">Back to the homepage</a></p>
   `;
 
   response.send(getLayoutHTML(content));
