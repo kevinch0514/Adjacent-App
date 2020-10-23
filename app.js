@@ -10,6 +10,8 @@ let express = require('express');
 // See https://github.com/expressjs/morgan
 let logger = require('morgan');
 
+let { Octokit } = require("@octokit/rest");
+
 let app = express();
 
 // Tell Express to load static files from the public/ directory
@@ -220,63 +222,31 @@ app.get('/repository', (request, response) => {
         <input type="submit" value="Submit">
     </form>
   `;
-  // } else {
-  //   let content = `
-  //   <h1>Repository</h1>
-  //   <h3>This repository page allows you to check on the latest commitments made on GitHub by typing in a username.</h3>
-  //   <h3>Get started by typing in a GitHub username.</h3>
-  //   <form action="/resources">
-  //       <label for="username">Username:</label>
-  //       <input type="text" id="usrname" name="username" required>
-  //       <input type="submit" value="Submit">
-  //   </form>
-  // `;
 
-  // GITHUB COMMIT API
-  // let process = require('process');
-  let { Octokit } = require("@octokit/rest");
+  let octokit = new Octokit({});
 
-  function main(username) {
+  octokit.repos.listForUser({ username: username }).then(function(response) {
+    let data = response.data;
 
-    let octokit = new Octokit({});
+    Promise.all(data.map(item => {
+      return octokit.repos.listCommits({
+        owner: username,
+        repo: item.name,
+      });
+    })).then(responses => {
+      content += '<ol>';
+      for (let response of responses) {
+        let data = response.data;
+        let firstCommit = data[0].commit;
 
-    content += `<ol>`;
-
-    octokit.repos.listForUser({ username: username }).then(function(response) {
-      let data = response.data;
-
-      for (let item of data) {
-        console.log(`Repo: ${item.name}`);
-        content += `<li>Repo: ${item.name}</li>`;
-
-        // content += `<ol>`;
-
-        octokit.repos.listCommits({
-          owner: username,
-          repo: item.name,
-        }).then(function(response) {
-          console.log(response.data[0].commit.author);
-          content += `<li>${response.data[0].commit.author}</li>`;
-        }).catch((error) => {
-          assert.isNotOk(error,'Promise error'); //https://stackoverflow.com/questions/39716569/nodejs-unhandledpromiserejectionwarning
-        });
-
-    // content += `<ol>`;
+        content += `<li>${firstCommit.author}</li>`
+      content += '<ol>';
       }
+      content += '</ol>';
+
+      response.send(getLayoutHTML(content));
     });
-    content += `<ol>`;
-  }
-
-    // let username = process.argv[2];
-
-    // if (username === undefined) {
-    //   console.log('Please specify username');
-    //   process.exit(1);
-    // }
-
-    main(username);
-
-  response.send(getLayoutHTML(content));
+  });
 });
 
 
