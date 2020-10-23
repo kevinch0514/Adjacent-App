@@ -1,3 +1,5 @@
+// GITHUB COMMIT API
+
 // In your project, first run: npm install @octokit/rest
 // Then run:
 //   node github.js jfarmer
@@ -15,6 +17,14 @@ function main(username) {
 
     for (let item of data) {
       console.log(`Repo: ${item.name}`);
+
+      octokit.repos.listCommits({
+        owner: username,
+        repo: item.name,
+      }).then(function(response) {
+        console.log(response.data[0].commit.author);
+      });
+
     }
   });
 }
