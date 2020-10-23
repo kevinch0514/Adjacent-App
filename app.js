@@ -208,7 +208,7 @@ app.get('/resources', (request, response) => {
   response.send(getLayoutHTML(content));
 });
 
-app.get('/repository', (request, response) => {
+app.get('/repository', (request, res) => {
   let username = request.query.username;
 
   // if (username === undefined) {
@@ -223,30 +223,35 @@ app.get('/repository', (request, response) => {
     </form>
   `;
 
-  let octokit = new Octokit({});
-
-  octokit.repos.listForUser({ username: username }).then(function(response) {
-    let data = response.data;
-
-    Promise.all(data.map(item => {
-      return octokit.repos.listCommits({
-        owner: username,
-        repo: item.name,
-      });
-    })).then(responses => {
-      content += '<ol>';
-      for (let response of responses) {
-        let data = response.data;
-        let firstCommit = data[0].commit;
-
-        content += `<li>${firstCommit.author}</li>`
-      content += '<ol>';
-      }
-      content += '</ol>';
-
-      response.send(getLayoutHTML(content));
+  if (username === undefined) {
+    res.send(getLayoutHTML(content));
+  } else {
+    let octokit = new Octokit({
+      auth: '173f077550ed6c4fa40c4b481fa791049e857d17'
     });
-  });
+
+    octokit.repos.listForUser({ username: username }).then(function(response) {
+      let data = response.data;
+
+      Promise.all(data.map(item => {
+        return octokit.repos.listCommits({
+          owner: username,
+          repo: item.name,
+        });
+      })).then(responses => {
+        content += '<ol>';
+        for (let response of responses) {
+          let data = response.data;
+          let firstCommit = data[0].commit;
+
+          content += `<li>${firstCommit.author.email}</li>`
+        }
+        content += '</ol>';
+
+        res.send(getLayoutHTML(content));
+      })
+    });
+  }
 });
 
 
