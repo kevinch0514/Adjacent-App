@@ -38,6 +38,9 @@ function getLayoutHTML(content) {
 
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/main.css">
+        <meta charset='utf-8' />
+      <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css' rel='stylesheet' />
+      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js'></script>
         <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
       </head>
       <body>
@@ -158,23 +161,322 @@ app.get('/schedule', (request, response) => {
     <p> We could put a link to an empty page with the schedule for week x </p>
     <p> We woudld then have links to pages for every week </p>
     </div>
-
+    <button type = "button" id = "openCalendar">October Schedule</button>
+    <div id= "calendar"></div>
     <p><a href="/">Back to the homepage</a></p>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        initialDate: '2020-10-07',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-01T12:00:00',
+            end: '2020-10-01T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-02T12:00:00',
+            end: '2020-10-02T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-05T12:00:00',
+            end: '2020-10-05T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-06T12:00:00',
+            end: '2020-10-06T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-07T12:00:00',
+            end: '2020-10-07T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-08T12:00:00',
+            end: '2020-10-08T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-09T12:00:00',
+            end: '2020-10-09T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-12T12:00:00',
+            end: '2020-10-12T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-13T12:00:00',
+            end: '2020-10-13T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-14T12:00:00',
+            end: '2020-10-14T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-15T12:00:00',
+            end: '2020-10-15T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-16T12:00:00',
+            end: '2020-10-16T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-19T12:00:00',
+            end: '2020-10-19T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-20T12:00:00',
+            end: '2020-10-20T12:30:00'
+          },
+
+           {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-21T12:00:00',
+            end: '2020-10-21T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-22T12:00:00',
+            end: '2020-10-22T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-23T12:00:00',
+            end: '2020-10-23T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-26T12:00:00',
+            end: '2020-10-26T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-27T12:00:00',
+            end: '2020-10-27T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-28T12:00:00',
+            end: '2020-10-28T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-29T12:00:00',
+            end: '2020-10-29T12:30:00'
+          },
+
+          {
+            groupID: 'Daily Hands In',
+            title: 'Adjancent Hands-In',
+            start: '2020-10-30T12:00:00',
+            end: '2020-10-30T12:30:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-01T14:45:00',
+            end: '2020-10-01T16:00:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-06T14:45:00',
+            end: '2020-10-06T16:00:00'
+          },
+
+           {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-08T14:45:00',
+            end: '2020-10-08T16:00:00'
+          },
+
+           {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-13T14:45:00',
+            end: '2020-10-13T16:00:00'
+          },
+
+            {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-20T14:45:00',
+            end: '2020-10-20T16:00:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-22T14:45:00',
+            end: '2020-10-22T16:00:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-27T14:45:00',
+            end: '2020-10-27T16:00:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-29T14:45:00',
+            end: '2020-10-29T16:00:00'
+          },
+
+          {
+            groupID: 'CIS 101',
+            title: 'CIS 101',
+            start: '2020-10-15T14:45:00',
+            end: '2020-10-15T16:00:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-01T13:30:00',
+            end: '2020-10-01T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-05T13:30:00',
+            end: '2020-10-05T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-08T13:30:00',
+            end: '2020-10-08T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-12T13:30:00',
+            end: '2020-10-12T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-15T13:30:00',
+            end: '2020-10-15T14:30:00'
+          },
+
+           {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-19T13:30:00',
+            end: '2020-10-19T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-26T13:30:00',
+            end: '2020-10-26T14:30:00'
+          },
+
+          {
+            groupID: 'Help Session',
+            title: 'Jesse Help Session',
+            start: '2020-10-29T13:30:00',
+            end: '2020-10-29T14:30:00'
+          },
+
+
+        ]
+      });
+      calendar.render();
+    });
+    </script>
+
   `;
 
   response.send(getLayoutHTML(content));
-});
+
+  });
+
 
 
 app.get('/announcements', (request, response) => {
   let content = `
+  <div id =announcementHeading>
     <h1>Announcements</h1>
-    <h2>⚠️This page is under construction⚠️</h2>
-    <p>Here is list of all the important announcements </p>
-
-
+  </div>
     <div id = "announcementList">
-    <p> A list of announcements in chronological order, newest at top </p>
+      <ul>
+        <li>The Election is Nov. 3rd <a href=https://vote.gov/>register to vote!<a></li>
+        <li>A meteor may hit the earth on election day.</li>
+        <li>Remember to push to github every day.</li>
+        <li>Wear a mask.</li>
+      </ul>
     </div>
 
     <p><a href="/">Back to the homepage</a></p>
